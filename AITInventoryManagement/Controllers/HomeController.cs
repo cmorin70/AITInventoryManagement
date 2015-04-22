@@ -26,5 +26,16 @@ namespace AITInventoryManagement.Controllers
 
             return View();
         }
+        public ActionResult ManageInventory()
+        {
+            ViewBag.Message = "ManageInventoryPageHere";
+
+            return View();
+        }
+        public ActionResult AddNewPartType()
+        {
+            
+            return View();
+        }
     }
 }
