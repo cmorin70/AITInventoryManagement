@@ -33,9 +33,16 @@ namespace AITInventoryManagement.Controllers
             return View();
         }
         public ActionResult AddNewPartType()
-        {
-            
+        {            
             return View();
+        }
+        public ActionResult AddNewLocation()
+        {
+            return View();
+        }
+        public ActionResult RenderPartialView(string viewName)
+        {
+            return PartialView(viewName);
         }
     }
 }

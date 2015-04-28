@@ -4,36 +4,66 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="InventoryDatabase.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
-        <EntityContainer Name="InventoryDatabaseTargetContainer" >
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="InventoryDatabase.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="InventoryDatabaseStoreContainer">
+    <EntitySet Name="PartTypes" EntityType="InventoryDatabase.Store.PartTypes" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="PartTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PartTypeName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AvailableQuantity" Type="int" Nullable="false" />
+  </EntityType>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="InventoryDatabase" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="InventoryDatabaseContainer" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="PartTypes" EntityType="InventoryDatabase.PartType" />
+          <EntitySet Name="Parts" EntityType="InventoryDatabase.Part" />
+          <EntitySet Name="Locations" EntityType="InventoryDatabase.Location" />
+          <EntitySet Name="PartLocations" EntityType="InventoryDatabase.PartLocation" />
         </EntityContainer>
-        <EntityType Name="PartType">
+        <EntityType Name="Part">
+          <Key>
+            <PropertyRef Name="PartID" />
+          </Key>
+          <Property Name="PartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartTypeName" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationDescription" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PartLocation">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PartTypeName" Type="String" Nullable="false" />
-          <Property Name="AvailableQuantity" Type="Int32" Nullable="false" />
+          <Property Name="PartID" Type="String" Nullable="false" />
+          <Property Name="LocationID" Type="String" Nullable="false" />
+          <Property Name="Quantity" Type="String" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
-        <Alias Key="Model" Value="InventoryDatabase" />
-        <Alias Key="Target" Value="InventoryDatabase.Store" />
-        <EntityContainerMapping CdmEntityContainer="InventoryDatabaseContainer" StorageEntityContainer="InventoryDatabaseTargetContainer">
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InventoryDatabaseStoreContainer" CdmEntityContainer="InventoryDatabaseContainer">
+    <EntitySetMapping Name="Parts">
+      <EntityTypeMapping TypeName="IsTypeOf(InventoryDatabase.Part)">
+        <MappingFragment StoreEntitySet="PartTypes">
+          <ScalarProperty Name="PartID" ColumnName="Id" />
+          <ScalarProperty Name="PartTypeName" ColumnName="PartTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -47,6 +77,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->

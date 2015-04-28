@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using AITInventoryManagement;
+
 
 namespace AITInventoryManagement
 {
     public class QueryManager
-    {        
-        public void addNewPartType(string name, string initialQuantity)
+    {
+        public void addNewPartType(string name, int initialQuantity)
         {
-            
+            InventoryDatabaseContainer db = new InventoryDatabaseContainer();
+
         }
     }
 }

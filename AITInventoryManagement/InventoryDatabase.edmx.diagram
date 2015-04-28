@@ -5,7 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="112a2868af0041ec8af50815007274b5" Name="Diagram1" >
-        <EntityTypeShape EntityType="InventoryDatabase.PartType" Width="1.5" PointX="5.625" PointY="1.875" />
+        <EntityTypeShape EntityType="InventoryDatabase.Part" Width="1.5" PointX="4.375" PointY="1.75" />
+        <EntityTypeShape EntityType="InventoryDatabase.Location" Width="1.5" PointX="10.25" PointY="1.875" />
+        <EntityTypeShape EntityType="InventoryDatabase.PartLocation" Width="1.5" PointX="7.375" PointY="1.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

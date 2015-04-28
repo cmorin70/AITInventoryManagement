@@ -1,11 +1,17 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ManageInventory";
 }
 
-<h2>ManageInventory</h2>
+<h2>ManageInventory Page</h2>
 
 <ul>
-    <li>@Html.ActionLink("Add a new Part Type", "AddNewPartType", "Home" </li>
+    <li>@Html.ActionLink("Add a new Part Type", "AddNewPartType", "Home")</li>
+    <li>@Html.ActionLink("Update part quantities", "UpdatePartQuantity","Home")</li>
+    <li>@Html.ActionLink("Add new location", "AddNewLocation", "Home")</li>
+    <li>@Ajax.ActionLink("Add new location", "RenderPartialView", "Home", new { viewName = "_ManageLocation" }, new AjaxOptions { UpdateTargetId = "partialPlaceholder", InsertionMode = InsertionMode.Replace, HttpMethod = "GET"}) </li>
+
 </ul>
+<div id="partialPlaceholder">
+    @*{Html.RenderPartial("_ManageLocation");}*@
+</div>
 
